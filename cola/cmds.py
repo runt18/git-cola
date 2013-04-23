@@ -684,7 +684,8 @@ class OpenRepo(Command):
 
     def do(self):
         self.model.set_directory(self.repo_path)
-        utils.fork([sys.executable, sys.argv[0], '--repo', self.repo_path])
+        utils.fork([sys.executable, sys.argv[0],
+                    '--no-fork', '--repo', self.repo_path])
 
 
 class Clone(Command):

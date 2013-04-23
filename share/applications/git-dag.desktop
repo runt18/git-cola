@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Git DAG
 Comment=An advanced git DAG visualizer
-Exec=git-dag --prompt
+Exec=git-dag --no-fork --prompt
 Icon=/usr/share/git-cola/icons/git.svg
 StartupNotify=true
 Terminal=false

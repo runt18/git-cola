@@ -13,4 +13,4 @@ then
 	python=python
 fi
 
-exec "$python" "$contents/Resources/bin/git-cola" --prompt
+exec "$python" "$contents/Resources/bin/git-cola" --no-fork --prompt

@@ -211,6 +211,20 @@ def parse_args(context):
                       action='store_true',
                       default=False)
 
+    should_fork = not utils.is_win32()
+
+    parser.add_option('-f', '--no-fork',
+                      help="Foreground: Don't fork when starting GUI",
+                      dest='fork',
+                      action='store_false',
+                      default=should_fork)
+
+    parser.add_option('--fork',
+                      help='Fork and detach GUI from the console',
+                      dest='fork',
+                      action='store_true',
+                      default=should_fork)
+
     # Used on Windows for adding 'git' to the path
     parser.add_option('-g', '--git-path',
                       help='Specifies the path to the git binary',
@@ -259,6 +273,12 @@ def main(context):
     setup_environment()
     opts, args, context = parse_args(context)
     repo = process_args(opts, args)
+
+    if opts.fork:
+        # Launch ourself in the background
+        argv = [sys.executable] + sys.argv + ['--no-fork']
+        utils.fork(argv)
+        return 0
 
     # Allow Ctrl-C to exit
     signal.signal(signal.SIGINT, signal.SIG_DFL)

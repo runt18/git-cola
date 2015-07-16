@@ -25,6 +25,11 @@ from cola.widgets import defs
 from cola.widgets.text import VimMonoTextView
 from cola.compat import ustr
 
+try:
+    from cola import pygments
+except ImportError as e:
+    pygments = None
+
 
 COMMITS_SELECTED = 'COMMITS_SELECTED'
 FILES_SELECTED = 'FILES_SELECTED'
@@ -127,8 +132,11 @@ class DiffTextEdit(VimMonoTextView):
 
         VimMonoTextView.__init__(self, parent)
         # Diff/patch syntax highlighter
-        self.highlighter = DiffSyntaxHighlighter(self.document(),
-                                                 whitespace=whitespace)
+        if pygments is None:
+            self.highlighter = DiffSyntaxHighlighter(self.document(),
+                                                     whitespace=whitespace)
+        else:
+            self.highlighter = pygments.PygmentsHighlighter(self.document())
 
 class DiffEditorWidget(QtGui.QWidget):
 

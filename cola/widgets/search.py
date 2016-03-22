@@ -25,7 +25,7 @@ from cola.widgets.diff import DiffTextEdit
 
 
 def mkdate(timespec):
-    return '%04d-%02d-%02d' % time.localtime(timespec)[:3]
+    return '{0:04d}-{1:02d}-{2:02d}'.format(*time.localtime(timespec)[:3])
 
 
 class SearchOptions(object):

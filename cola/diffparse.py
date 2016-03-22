@@ -36,13 +36,13 @@ def _format_range(start, count):
     if count == 1:
         return str(start)
     else:
-        return '%d,%d' % (start, count)
+        return '{0:d},{1:d}'.format(start, count)
 
 
 def _format_hunk_header(old_start, old_count,
                        new_start, new_count,
                        heading=''):
-    return '@@ -%s +%s @@%s' % (_format_range(old_start, old_count),
+    return '@@ -{0!s} +{1!s} @@{2!s}'.format(_format_range(old_start, old_count),
                                 _format_range(new_start, new_count),
                                 heading)
 
@@ -60,7 +60,7 @@ def _parse_diff(diff_text):
                                    heading, line_idx, lines=[line]))
         elif not hunks:
             # first line of the diff is not a header line
-            errmsg = 'Malformed diff?: %s' % diff_text
+            errmsg = 'Malformed diff?: {0!s}'.format(diff_text)
             raise AssertionError(errmsg)
         elif line:
             hunks[-1].lines.append(line)
@@ -82,7 +82,7 @@ class DiffParser(object):
         CONTEXT = ' '
         NO_NEWLINE = '\\'
 
-        lines = ['--- a/%s' % self.filename, '+++ b/%s' % self.filename]
+        lines = ['--- a/{0!s}'.format(self.filename), '+++ b/{0!s}'.format(self.filename)]
 
         start_offset = 0
 

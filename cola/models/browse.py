@@ -49,7 +49,7 @@ class Columns(object):
         elif column == cls.AGE:
             return N_('Age')
         else:
-            raise NotImplementedError('Mapping required for "%s"' % column)
+            raise NotImplementedError('Mapping required for "{0!s}"'.format(column))
 
 
 class GitRepoEntryStore(object):

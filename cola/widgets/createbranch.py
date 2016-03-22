@@ -264,7 +264,7 @@ class CreateBranchDialog(Dialog):
                         +'\t' + subject)
                 if idx >= 5:
                     skip = len(commits) - 5
-                    lines.append('\t(%s)' % (N_('%d skipped') % skip))
+                    lines.append('\t({0!s})'.format((N_('%d skipped') % skip)))
                     break
             line = N_('Recovering lost commits may not be easy.')
             lines.append(line)

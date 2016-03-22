@@ -109,7 +109,7 @@ def new_repo():
     else:
         title = N_('Error Creating Repository')
         msg = (N_('"%(command)s" returned exit status %(status)d') %
-               dict(command='git init %s' % path, status=status))
+               dict(command='git init {0!s}'.format(path), status=status))
         details = N_('Output:\n%s') % out
         if err:
             details += '\n\n'

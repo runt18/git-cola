@@ -24,7 +24,7 @@ def default_remote(config=None):
     """Return the remote tracked by the current branch."""
     if config is None:
         config = gitcfg.current()
-    return config.get('branch.%s.remote' % current_branch())
+    return config.get('branch.{0!s}.remote'.format(current_branch()))
 
 
 def diff_index_filenames(ref):
@@ -183,10 +183,10 @@ def tracked_branch(branch=None, config=None):
         branch = current_branch()
     if branch is None:
         return None
-    remote = config.get('branch.%s.remote' % branch)
+    remote = config.get('branch.{0!s}.remote'.format(branch))
     if not remote:
         return None
-    merge_ref = config.get('branch.%s.merge' % branch)
+    merge_ref = config.get('branch.{0!s}.merge'.format(branch))
     if not merge_ref:
         return None
     refs_heads = 'refs/heads/'
@@ -295,7 +295,7 @@ def diff_helper(commit=None,
         ref, endref = commit+'^', commit
     argv = []
     if ref and endref:
-        argv.append('%s..%s' % (ref, endref))
+        argv.append('{0!s}..{1!s}'.format(ref, endref))
     elif ref:
         for r in utils.shell_split(ref.strip()):
             argv.append(r)
@@ -616,7 +616,7 @@ def log_helper(all=False, extra_args=None):
 
 def rev_list_range(start, end):
     """Return a (SHA-1, summary) pairs between start and end."""
-    revrange = '%s..%s' % (start, end)
+    revrange = '{0!s}..{1!s}'.format(start, end)
     out = git.rev_list(revrange, pretty='oneline')[STDOUT]
     return parse_rev_list(out)
 

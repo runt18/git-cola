@@ -196,7 +196,7 @@ class CompareBranchesDialog(standard.Dialog):
                 return gitcmds.merge_base(branch, tracked_branch)
             else:
                 remote_branches = gitcmds.branch_list(remote=True)
-                remote_branch = 'origin/%s' % branch
+                remote_branch = 'origin/{0!s}'.format(branch)
                 if remote_branch in remote_branches:
                     return gitcmds.merge_base(branch, remote_branch)
 

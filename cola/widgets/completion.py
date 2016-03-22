@@ -289,15 +289,15 @@ class HighlightDelegate(QtGui.QStyledItemDelegate):
         text = index.data()
         if self.case_sensitive:
             html = text.replace(self.highlight_text,
-                                '<strong>%s</strong>' % self.highlight_text)
+                                '<strong>{0!s}</strong>'.format(self.highlight_text))
         else:
-            match = re.match(r'(.*)(%s)(.*)' % re.escape(self.highlight_text),
+            match = re.match(r'(.*)({0!s})(.*)'.format(re.escape(self.highlight_text)),
                              text, re.IGNORECASE)
             if match:
                 start = match.group(1) or ''
                 middle = match.group(2) or ''
                 end = match.group(3) or ''
-                html = (start + ('<strong>%s</strong>' % middle) + end)
+                html = (start + ('<strong>{0!s}</strong>'.format(middle)) + end)
             else:
                 html = text
         self.doc.setHtml(html)

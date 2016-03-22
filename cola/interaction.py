@@ -25,9 +25,9 @@ class Interaction(object):
         scope['informative_text'] = (informative_text and
                 '\n'+informative_text or '')
         sys.stdout.write("""
-%(title)s
-%(title_dashes)s
-%(message)s%(details)s%(informative_text)s\n""" % scope)
+{title!s}
+{title_dashes!s}
+{message!s}{details!s}{informative_text!s}\n""".format(**scope))
 
     @classmethod
     def critical(cls, title, message=None, details=None):
@@ -41,9 +41,9 @@ class Interaction(object):
         cls.information(title, message=text,
                         informative_text=informative_text)
         if default:
-            prompt = '%s? [Y/n] ' % ok_text
+            prompt = '{0!s}? [Y/n] '.format(ok_text)
         else:
-            prompt = '%s? [y/N] ' % ok_text
+            prompt = '{0!s}? [y/N] '.format(ok_text)
         sys.stdout.write(prompt)
         answer = sys.stdin.readline().strip()
         if answer:

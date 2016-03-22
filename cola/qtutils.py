@@ -592,20 +592,20 @@ def checkbox(text='', tooltip='', checked=None):
 
     url = icons.check_name()
     style = """
-        QCheckBox::indicator {
-            width: %(size)dpx;
-            height: %(size)dpx;
-        }
-        QCheckBox::indicator::unchecked {
-            border: %(border)dpx solid #999;
+        QCheckBox::indicator {{
+            width: {size:d}px;
+            height: {size:d}px;
+        }}
+        QCheckBox::indicator::unchecked {{
+            border: {border:d}px solid #999;
             background: #fff;
-        }
-        QCheckBox::indicator::checked {
-            image: url(%(url)s);
-            border: %(border)dpx solid black;
+        }}
+        QCheckBox::indicator::checked {{
+            image: url({url!s});
+            border: {border:d}px solid black;
             background: #fff;
-        }
-    """ % dict(size=defs.checkbox, border=defs.border, url=url)
+        }}
+    """.format(**dict(size=defs.checkbox, border=defs.border, url=url))
     cb.setStyleSheet(style)
 
     return cb
@@ -625,22 +625,22 @@ def radio(text='', tooltip='', checked=None):
     border = defs.radio_border
     url = icons.dot_name()
     style = """
-        QRadioButton::indicator {
-            width: %(size)dpx;
-            height: %(size)dpx;
-        }
-        QRadioButton::indicator::unchecked {
+        QRadioButton::indicator {{
+            width: {size:d}px;
+            height: {size:d}px;
+        }}
+        QRadioButton::indicator::unchecked {{
             background: #fff;
-            border: %(border)dpx solid #999;
-            border-radius: %(radius)dpx;
-        }
-        QRadioButton::indicator::checked {
-            image: url(%(url)s);
+            border: {border:d}px solid #999;
+            border-radius: {radius:d}px;
+        }}
+        QRadioButton::indicator::checked {{
+            image: url({url!s});
             background: #fff;
-            border: %(border)dpx solid black;
-            border-radius: %(radius)dpx;
-        }
-    """ % dict(size=size, radius=radius, border=border, url=url)
+            border: {border:d}px solid black;
+            border-radius: {radius:d}px;
+        }}
+    """.format(**dict(size=size, radius=radius, border=border, url=url))
     rb.setStyleSheet(style)
 
     return rb

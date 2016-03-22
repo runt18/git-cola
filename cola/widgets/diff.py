@@ -522,7 +522,7 @@ class DiffWidget(QtGui.QWidget):
                        """%(email)s</a>&gt;"""
                        % template_args)
 
-        author_template = '%(author)s <%(email)s>' % template_args
+        author_template = '{author!s} <{email!s}>'.format(**template_args)
         self.author_label.set_template(author_text, author_template)
         self.summary_label.set_text(summary)
         self.sha1_label.set_text(self.sha1)

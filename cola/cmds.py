@@ -263,7 +263,7 @@ class ApplyPatches(Command):
                 diff = self.model.git.diff('HEAD^!', stat=True)[STDOUT]
                 diff_text += (N_('PATCH %(current)d/%(count)d') %
                               dict(current=idx+1, count=num_patches))
-                diff_text += ' - %s:\n%s\n\n' % (os.path.basename(patch), diff)
+                diff_text += ' - {0!s}:\n{1!s}\n\n'.format(os.path.basename(patch), diff)
 
         diff_text += N_('Summary:') + '\n'
         diff_text += self.model.git.diff(orig_head, stat=True)[STDOUT]
@@ -494,7 +494,7 @@ class Ignore(Command):
             current_list = core.read('.gitignore')
             new_additions = current_list.rstrip() + '\n' + new_additions
         core.write('.gitignore', new_additions)
-        Interaction.log_status(0, 'Added to .gitignore:\n%s' % for_status, '')
+        Interaction.log_status(0, 'Added to .gitignore:\n{0!s}'.format(for_status), '')
         self.model.update_file_status()
 
 
@@ -825,7 +825,7 @@ class Edit(Command):
             editor_opts = {
                     '*vim*': ['+'+self.line_number, filename],
                     '*emacs*': ['+'+self.line_number, filename],
-                    '*textpad*': ['%s(%s,0)' % (filename, self.line_number)],
+                    '*textpad*': ['{0!s}({1!s},0)'.format(filename, self.line_number)],
                     '*notepad++*': ['-n'+self.line_number, filename],
             }
 
@@ -1497,8 +1497,8 @@ class SignOff(Command):
 
         cfg = gitcfg.current()
         name = cfg.get('user.name', user)
-        email = cfg.get('user.email', '%s@%s' % (user, core.node()))
-        return '\nSigned-off-by: %s <%s>' % (name, email)
+        email = cfg.get('user.email', '{0!s}@{1!s}'.format(user, core.node()))
+        return '\nSigned-off-by: {0!s} <{1!s}>'.format(name, email)
 
 
 def check_conflicts(unmerged):
@@ -1672,7 +1672,7 @@ class Tag(Command):
                 core.write(opts['F'], self._message)
 
             if self._sign:
-                log_msg += ' (%s)' % N_('GPG-signed')
+                log_msg += ' ({0!s})'.format(N_('GPG-signed'))
                 opts['s'] = True
             else:
                 opts['a'] = bool(self._message)
@@ -1746,9 +1746,9 @@ class UntrackedSummary(Command):
         untracked = self.model.untracked
         suffix = len(untracked) > 1 and 's' or ''
         io = StringIO()
-        io.write('# %s untracked file%s\n' % (len(untracked), suffix))
+        io.write('# {0!s} untracked file{1!s}\n'.format(len(untracked), suffix))
         if untracked:
-            io.write('# possible .gitignore rule%s:\n' % suffix)
+            io.write('# possible .gitignore rule{0!s}:\n'.format(suffix))
             for u in untracked:
                 io.write('/'+u+'\n')
         self.new_diff_text = io.getvalue()

@@ -350,7 +350,7 @@ class GitConfig(observable.Observable):
         status, out, err = self.git.check_attr('encoding', '--', path)
         if status != 0:
             return None
-        header = '%s: encoding: ' % path
+        header = '{0!s}: encoding: '.format(path)
         if out.startswith(header):
             encoding = out[len(header):].strip()
             if (encoding != 'unspecified' and
@@ -366,8 +366,8 @@ class GitConfig(observable.Observable):
         as `opts[cmd]`.
 
         """
-        prefix = len('guitool.%s.' % name)
-        guitools = self.find('guitool.%s.*' % name)
+        prefix = len('guitool.{0!s}.'.format(name))
+        guitools = self.find('guitool.{0!s}.*'.format(name))
         return dict([(key[prefix:], value)
                         for (key, value) in guitools.items()])
 
@@ -381,7 +381,7 @@ class GitConfig(observable.Observable):
     def get_guitool_names_and_shortcuts(self):
         """Return guitool names and their configured shortcut"""
         names = self.get_guitool_names()
-        return [(name, self.get('guitool.%s.shortcut' % name)) for name in names]
+        return [(name, self.get('guitool.{0!s}.shortcut'.format(name))) for name in names]
 
     def terminal(self):
         term = self.get('cola.terminal', None)
@@ -390,13 +390,13 @@ class GitConfig(observable.Observable):
             term = 'xterm -e' # for mac osx
             candidates = ('xfce4-terminal', 'konsole', 'gnome-terminal')
             for basename in candidates:
-                if core.exists('/usr/bin/%s' % basename):
-                    term = '%s -e' % basename
+                if core.exists('/usr/bin/{0!s}'.format(basename)):
+                    term = '{0!s} -e'.format(basename)
                     break
         return term
 
     def color(self, key, default):
-        string = self.get('cola.color.%s' % key, default)
+        string = self.get('cola.color.{0!s}'.format(key), default)
         string = core.encode(string)
         default = core.encode(default)
         struct_layout = core.encode('BBB')

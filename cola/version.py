@@ -82,9 +82,9 @@ def git_version():
 
 def print_version(brief=False):
     if brief:
-        msg = '%s\n' % version()
+        msg = '{0!s}\n'.format(version())
     else:
-        msg = 'cola version %s\n' % version()
+        msg = 'cola version {0!s}\n'.format(version())
     sys.stdout.write(msg)
 
 

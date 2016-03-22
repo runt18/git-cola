@@ -62,7 +62,7 @@ def combine(result, existing):
                     combine(existing[1], result[1]),
                     combine(existing[2], result[2]))
         else:
-            raise AssertionError('combine() with length %d' % len(existing))
+            raise AssertionError('combine() with length {0:d}'.format(len(existing)))
     else:
         if existing and result:
             return existing + '\n\n' + result
@@ -293,8 +293,7 @@ class RemoteActionDialog(standard.Dialog):
         displayed = []
         for remote_name in self.model.remotes:
             url = self.model.remote_url(remote_name, self.action)
-            display = ('%s\t(%s)'
-                       % (remote_name, N_('URL: %s') % url))
+            display = ('{0!s}\t({1!s})'.format(remote_name, N_('URL: %s') % url))
             displayed.append(display)
         qtutils.set_items(widget,displayed)
 
@@ -403,7 +402,7 @@ class RemoteActionDialog(standard.Dialog):
 
         if action == PUSH and not remote_branch:
             branch = local_branch
-            candidate = '%s/%s' % (remote, branch)
+            candidate = '{0!s}/{1!s}'.format(remote, branch)
             if candidate not in self.model.remote_branches:
                 title = N_('Push')
                 args = dict(branch=branch, remote=remote)
@@ -454,7 +453,7 @@ class RemoteActionDialog(standard.Dialog):
         if not out: # git fetch --tags --verbose doesn't print anything...
             out = already_up_to_date
 
-        command = 'git %s' % self.action.lower()
+        command = 'git {0!s}'.format(self.action.lower())
         message = (N_('"%(command)s" returned exit status %(status)d') %
                    dict(command=command, status=status))
         details = ''

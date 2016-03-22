@@ -98,7 +98,7 @@ class GitArchiveDialog(QtGui.QDialog):
         # outputs
         self.fmt = None
 
-        filename = '%s-%s' % (os.path.basename(core.getcwd()), shortref)
+        filename = '{0!s}-{1!s}'.format(os.path.basename(core.getcwd()), shortref)
         self.prefix = filename + '/'
         self.filename = filename
 
@@ -223,7 +223,7 @@ class GitArchiveDialog(QtGui.QDialog):
     def update_filetext_for_format(self, idx):
         self.fmt = self.format_strings[idx]
         text = self.strip_exts(self.filetext.text())
-        self.filename = '%s.%s' % (text, self.fmt)
+        self.filename = '{0!s}.{1!s}'.format(text, self.fmt)
         self.filetext.setText(self.filename)
         self.filetext.setFocus()
         if '/' in text:

@@ -99,8 +99,7 @@ class VerboseRename(object):
     def __call__(self, from_, to):
 
         self.stream.write(
-                "Renaming directory '%s' -> '%s'\n"
-                    % (os.path.basename(from_), os.path.basename(to))
+                "Renaming directory '{0!s}' -> '{1!s}'\n".format(os.path.basename(from_), os.path.basename(to))
                 )
 
         self.renamer(from_, to)

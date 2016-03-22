@@ -552,7 +552,7 @@ class MainView(standard.MainWindow):
         for r in recent:
             name = os.path.basename(r)
             directory = os.path.dirname(r)
-            text = '%s %s %s' % (name, unichr(0x2192), directory)
+            text = '{0!s} {1!s} {2!s}'.format(name, unichr(0x2192), directory)
             menu.addAction(text, cmds.run(cmd, r))
 
     # Accessors
@@ -637,7 +637,7 @@ class MainView(standard.MainWindow):
 
         l = unichr(0xab)
         r = unichr(0xbb)
-        title = ('%s: %s %s%s' % (
+        title = ('{0!s}: {1!s} {2!s}{3!s}'.format(
                     self.model.project,
                     branch,
                     alerts and ((r+' %s '+l+' ') % ', '.join(alerts)) or '',
@@ -724,7 +724,7 @@ class MainView(standard.MainWindow):
         archive.show_save_dialog(oid, parent=self)
 
     def show_cursor_position(self, rows, cols):
-        display = '%02d:%02d' % (rows, cols)
+        display = '{0:02d}:{1:02d}'.format(rows, cols)
         css = """
             <style>
             .good {
@@ -752,7 +752,7 @@ class MainView(standard.MainWindow):
             cls = 'first-warning'
         else:
             cls = 'good'
-        div = ('<div class="%s">%s</div>' % (cls, display))
+        div = ('<div class="{0!s}">{1!s}</div>'.format(cls, display))
         self.position_label.setText(css + div)
 
     def rebase_start(self):

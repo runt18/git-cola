@@ -103,9 +103,9 @@ class build_pot(Command):
                 if po_lang not in self.lang:
                     continue
             new_po = po + ".new"
-            cmd = "msgmerge %s %s -o %s" % (po, fullname, new_po)
+            cmd = "msgmerge {0!s} {1!s} -o {2!s}".format(po, fullname, new_po)
             self.spawn(cmd.split())
             # force LF line-endings
-            log.info("%s --> %s" % (new_po, po))
+            log.info("{0!s} --> {1!s}".format(new_po, po))
             self._force_LF(new_po, po)
             os.unlink(new_po)

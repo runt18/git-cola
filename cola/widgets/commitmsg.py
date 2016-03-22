@@ -565,7 +565,7 @@ class CommitSummaryLineEdit(HintedLineEdit):
 
         comment_char = prefs.comment_char()
         re_comment_char = re.escape(comment_char)
-        regex = QtCore.QRegExp(r'^[^%s \t].*' % re_comment_char)
+        regex = QtCore.QRegExp(r'^[^{0!s} \t].*'.format(re_comment_char))
         self._validator = QtGui.QRegExpValidator(regex, self)
         self.setValidator(self._validator)
 

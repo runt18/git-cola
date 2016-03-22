@@ -42,7 +42,7 @@ def write_json(values, path):
         with core.xopen(path, 'wt') as fp:
             json.dump(values, fp, indent=4)
     except:
-        sys.stderr.write('git-cola: error writing "%s"\n' % path)
+        sys.stderr.write('git-cola: error writing "{0!s}"\n'.format(path))
 
 
 class Settings(object):

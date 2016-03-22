@@ -47,7 +47,7 @@ class build_mo(Command):
             self.source_dir = 'po'
         if self.lang is None:
             if self.prj_name:
-                re_po = re.compile(r'^(?:%s-)?([a-zA-Z_]+)\.po$' % self.prj_name)
+                re_po = re.compile(r'^(?:{0!s}-)?([a-zA-Z_]+)\.po$'.format(self.prj_name))
             else:
                 re_po = re.compile(r'^([a-zA-Z_]+)\.po$')
             self.lang = []
@@ -76,7 +76,7 @@ class build_mo(Command):
                 log.info('Creating English PO file...')
                 pot = (self.prj_name or 'messages') + '.pot'
                 if self.prj_name:
-                    en_po = '%s-en.po' % self.prj_name
+                    en_po = '{0!s}-en.po'.format(self.prj_name)
                 else:
                     en_po = 'en.po'
                 self.spawn(['msginit',
@@ -101,7 +101,7 @@ class build_mo(Command):
             self.mkpath(dir_)
             mo = os.path.join(dir_, basename)
             if self.force or newer(po, mo):
-                log.info('Compile: %s -> %s' % (po, mo))
+                log.info('Compile: {0!s} -> {1!s}'.format(po, mo))
                 self.spawn(['msgfmt', '-o', mo, po])
 
 

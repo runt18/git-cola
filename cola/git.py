@@ -205,10 +205,9 @@ class Git(object):
             Interaction.log_status(status, msg, '')
         elif cola_trace == 'full':
             if out or err:
-                core.stderr("%s -> %d: '%s' '%s'" %
-                            (' '.join(command), status, out, err))
+                core.stderr("{0!s} -> {1:d}: '{2!s}' '{3!s}'".format(' '.join(command), status, out, err))
             else:
-                core.stderr("%s -> %d" % (' '.join(command), status))
+                core.stderr("{0!s} -> {1:d}".format(' '.join(command), status))
         elif cola_trace:
             core.stderr(' '.join(command))
 
@@ -242,9 +241,9 @@ class Git(object):
                 join = '='
             type_of_value = type(v)
             if v is True:
-                args.append('%s%s' % (dashes, dashify(k)))
+                args.append('{0!s}{1!s}'.format(dashes, dashify(k)))
             elif type_of_value in types_to_stringify:
-                args.append('%s%s%s%s' % (dashes, dashify(k), join, v))
+                args.append('{0!s}{1!s}{2!s}{3!s}'.format(dashes, dashify(k), join, v))
 
         return args
 

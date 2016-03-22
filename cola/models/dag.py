@@ -262,7 +262,7 @@ class RepoReader(object):
 
         if self._proc is None:
             ref_args = utils.shell_split(self.ctx.ref)
-            cmd = self._cmd + ['-%d' % self.ctx.count] + ref_args
+            cmd = self._cmd + ['-{0:d}'.format(self.ctx.count)] + ref_args
             self._proc = core.start_command(cmd)
             self._topo_list = []
 

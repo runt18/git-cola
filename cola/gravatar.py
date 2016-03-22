@@ -26,7 +26,7 @@ class Gravatar(object):
         # to force
         default_url = 'https://git-cola.github.io/images/git-64x64.jpg'
         encoded_url = urllib.quote(core.encode(default_url), core.encode(''))
-        query = '?s=%d&d=%s' % (imgsize, core.decode(encoded_url))
+        query = '?s={0:d}&d={1!s}'.format(imgsize, core.decode(encoded_url))
         url = 'https://gravatar.com/avatar/' + email_hash + query
         return url
 

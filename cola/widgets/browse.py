@@ -86,7 +86,7 @@ class Browser(standard.Widget):
         scope = dict(project=self.model.project, branch=branch)
         title = N_('%(project)s: %(branch)s - Browse') % scope
         if self.mode == self.model.mode_amend:
-            title += ' %s' % N_('(Amending)')
+            title += ' {0!s}'.format(N_('(Amending)'))
         self.setWindowTitle(title)
 
 
@@ -491,7 +491,7 @@ class SaveBlob(BaseCommand):
 
     def do(self):
         model = self.model
-        cmd = ['git', 'show', '%s:%s' % (model.ref, model.relpath)]
+        cmd = ['git', 'show', '{0!s}:{1!s}'.format(model.ref, model.relpath)]
         with core.xopen(model.filename, 'wb') as fp:
             proc = core.start_command(cmd, stdout=fp)
             out, err = proc.communicate()

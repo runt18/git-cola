@@ -388,11 +388,11 @@ class MainModel(Observable):
 
     def remote_url(self, name, action):
         if action == 'push':
-            url = self.git.config('remote.%s.pushurl' % name,
+            url = self.git.config('remote.{0!s}.pushurl'.format(name),
                                   get=True)[STDOUT]
             if url:
                 return url
-        return self.git.config('remote.%s.url' % name, get=True)[STDOUT]
+        return self.git.config('remote.{0!s}.url'.format(name), get=True)[STDOUT]
 
     def fetch(self, remote, **opts):
         return run_remote_action(self.git.fetch, remote, **opts)
@@ -511,7 +511,7 @@ def remote_args(remote,
 
 
 def refspec(src, dst, ffwd):
-    spec = '%s:%s' % (src, dst)
+    spec = '{0!s}:{1!s}'.format(src, dst)
     if not ffwd:
         spec = '+' + spec
     return spec

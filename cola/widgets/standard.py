@@ -372,14 +372,14 @@ class MainWindow(MainWindowMixin, QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         MainWindowMixin.__init__(self, QtGui.QMainWindow)
         self.setStyleSheet("""
-            QMainWindow::separator {
-                width: %(separator)spx;
-                height: %(separator)spx;
-            }
-            QMainWindow::separator:hover {
+            QMainWindow::separator {{
+                width: {separator!s}px;
+                height: {separator!s}px;
+            }}
+            QMainWindow::separator:hover {{
                 background: white;
-            }
-            """ % dict(separator=defs.separator))
+            }}
+            """.format(**dict(separator=defs.separator)))
 
 
 class TreeView(TreeMixin, QtGui.QTreeView):

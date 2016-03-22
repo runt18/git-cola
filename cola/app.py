@@ -13,7 +13,7 @@ import sys
 if sys.platform == 'darwin':
     from distutils import sysconfig
     python_version = sysconfig.get_python_version()
-    homebrew_mods = '/usr/local/lib/python%s/site-packages' % python_version
+    homebrew_mods = '/usr/local/lib/python{0!s}/site-packages'.format(python_version)
     if os.path.isdir(homebrew_mods):
         sys.path.append(homebrew_mods)
 
@@ -215,7 +215,7 @@ class ColaQApplication(QtGui.QApplication):
             return
         sid = session_mgr.sessionId()
         skey = session_mgr.sessionKey()
-        session_id = '%s_%s' % (sid, skey)
+        session_id = '{0!s}_{1!s}'.format(sid, skey)
         session = Session(session_id, repo=core.getcwd())
         self.view.save_state(settings=session)
 
